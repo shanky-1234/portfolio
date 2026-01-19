@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+
+@theme {
+  --color-main:#0C8CE9;
+  --color-secondary:#383838;
+  --font-main:"Lexend", sans-serif;
+  --font-secondary:"Zilla Slab", serif;
+  --font-display:"Architects Daughter", cursive;
+  --breakpoint-xs: 30rem;
+}
+
+html,
+body{
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lexend", sans-serif;
+  cursor: url('/profile/cursor_pointer.svg'), auto;
+}
+
+@layer components{
+  .flex-center{
+    @apply flex flex-row items-center justify-center
+  }
+
+  .scroll-container{
+    @apply md:h-[15vh] h-25
+  }
+  
+}
+
+.bg-image{
+  background: url(/profile/background.png);
+  background-size: contain;
+}
+
+
