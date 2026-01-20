@@ -16,9 +16,9 @@ function Projects() {
       scrollTrigger: {
         trigger: '.project',
         start: 'top top',
-        end: `+=${cards.length * 80}%`,
+        end: `+=${cards.length * 60}%`,
         pin: true,
-        scrub: true,
+        scrub: 0.6,
         anticipatePin:1,
         markers: false,
         invalidateOnRefresh: true
@@ -51,7 +51,7 @@ function Projects() {
         {
           project.map((item,index)=>{
             return(
-              <ProjectCard badges={item.badge} key={index} color={item.color} img1={item.img1} img2={item.img2} project={item.projectName} description={item.description}/>
+              <ProjectCard badges={item.badge} key={index} color={item.color} img1={item.img1} img2={item.img2} project={item.projectName} link={'https://mitrasamaj.org/'} description={item.description}/>
             )
           })
         }

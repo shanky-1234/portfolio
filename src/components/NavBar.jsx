@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import Button from './shared/Button'
 import {Menu, X} from 'lucide-react'
@@ -9,6 +9,25 @@ import gsap from 'gsap/all'
 
 function NavBar() {
     const {menu,setMenu} = UseMenu()
+    const [activeSection,setActiveSection] = useState(null)
+    useEffect(()=>{
+        const sections=document.querySelectorAll('section[id]')
+
+        const observer = new IntersectionObserver(entries=>{
+            entries.forEach((entry)=>{
+                if(entry.isIntersecting){
+                    setActiveSection(`#${entry.target.id}`)
+                }
+            })  
+        },{
+             rootMargin: "-50% 0px -50% 0px", 
+      threshold: 0
+        }
+    )
+    sections.forEach((sections)=>observer.observe(sections))
+    return () => observer.disconnect()
+    },[])
+
     function handleLink(e){
            e.preventDefault()
     const target = e.currentTarget.getAttribute("data-scroll")
@@ -21,6 +40,11 @@ function NavBar() {
       ease: "power2.out",
     })
 }
+
+const handleMail=()=>{
+    const mailUrl = `mailto:tuladharshashank2@gmail.com?subject=${encodeURIComponent('Inquiry about your service')}&body=${encodeURIComponent('Hello!')}`
+    window.location.href=mailUrl
+}
   return (
     
     <nav className='bg-secondary rounded-4xl py-4 px-8 md:px-10 h-fit md:inset-x-20 mx-8 inset-x-0 md:mx-10 my-8 top-0 z-99 shadow-lg md:max-w-full fixed  '>
@@ -31,21 +55,21 @@ function NavBar() {
             <div className='hidden md:block '>
             <ul className='flex gap-12 items-center'>
                 <li>
-                <a data-scroll="#aboutme" onClick={handleLink} className='text-white text-md font-medium hover:text-main transition-colors duration-300'>
+                <Link  data-scroll="#aboutme" onClick={handleLink} className={`${activeSection === '#aboutme' ?'text-main underline underline-offset-4':'text-white'} text-md font-medium hover:text-main transition-colors duration-300`}>
                     About Me
-                </a>
+                </Link>
                 </li>
                 <li>
-                   <Link data-scroll="#project" onClick={handleLink} className='text-white hover:text-main transition-colors duration-300'>
+                   <Link data-scroll="#project" onClick={handleLink} className={`${activeSection === '#project' ?'text-main underline underline-offset-4':'text-white'} text-md font-medium hover:text-main transition-colors duration-300`}>
                     Projects
                 </Link>
                 </li>
                  <li>
-                   <Link data-scroll='#gallery' onClick={handleLink} className='text-white hover:text-main transition-colors duration-300'>
+                   <Link data-scroll='#gallery' onClick={handleLink} className={`${activeSection === '#gallery' ?'text-main underline underline-offset-4':'text-white'} text-md font-medium hover:text-main transition-colors duration-300`}>
                     Gallery
                 </Link>
                 </li>
-                <Button content={"Let's Talk"} />
+                <Button content={"Let's Talk"} onClick={handleMail}/>
             </ul>
             </div>
            <div className='block md:hidden' >
@@ -69,7 +93,7 @@ function NavBar() {
                 </Link>
                 </li>
                 <li>
-                   <Link data-scroll="project" onClick={handleLink} className='text-white'>
+                   <Link data-scroll="#project" onClick={handleLink} className='text-white'>
                     Projects
                 </Link>
                 </li>
@@ -78,7 +102,7 @@ function NavBar() {
                     Gallery
                 </Link>
                 </li>
-                <Button content={"Let's Talk"} />
+                <Button content={"Let's Talk"} onClick={handleMail}/>
             </ul>
                 </div>
             </div>

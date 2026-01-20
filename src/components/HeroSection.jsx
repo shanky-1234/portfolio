@@ -19,6 +19,22 @@ function HeroSection() {
                 
             }
         })
+
+        const startTl = gsap.timeline({
+            delay:0.5,
+        })
+
+        startTl.to('.cartoon-img',{
+            opacity:1,
+            y:8,
+            ease:'power1.inOut'
+        }).from('.cursor',{
+            opacity:0,
+            x:100,
+            ease:'power1.in',
+            duration:0.5
+        })
+
         tl.to('.cursor',{
             rotate:-85,
             y:100,
@@ -31,18 +47,25 @@ function HeroSection() {
             stagger:1.5
         })
     })
+    const handleResume = ()=>{
+        window.open(
+    "/profile/resume/shashank.pdf",
+    "_blank",
+    "noopener,noreferrer"
+  );
+    }
   return (
     <>
-    <section className='mx-20  relative md:mt-45 lg:mt-40 mt-40 hero-section'>
+    <section id="aboutme"className='mx-20  relative md:mt-45 lg:mt-40 mt-40 hero-section cartoon-img opacity-0  '>
         <div className='absolute -z-20 inset-0 justify-center flex items-center'>
-            <div className='md:w-125 md:h-125 w-200 h-200'>
+            <div className='md:w-125 md:h-125 w-200 h-200 '>
             <img src="/profile/graph-background.png" alt="background" className='w-full h-full object-contain'/>
             </div>
         </div>
         <div className='z-20 inset-0 gap-8 md:-gap-20 flex flex-col text-center md:text-left md:flex-row justify-center items-center md:items-end-safe'>
             <div className='lg:w-80 w-60 md:w-70  -rotate-4 flex flex-col justify-center items-center'>
             <h3 className='font-display text-center text-3xl'>This is me!</h3>
-            <img src="/profile/cartoon.png" alt="cartoon" className='w-full h-full ' id='cartoon' />
+            <img src="/profile/cartoon.png" alt="cartoon" className='w-full h-full' id='cartoon' />
             <Link to='https://www.linkedin.com/in/shashank-tuladhar-0a4b93275/' className=' hidden md:flex gap-2'><img src="/profile/linkedIn.svg" alt="" /><span className='font-display text-xl'>IRL Me Here!</span></Link>
             </div>
             <section className='w-fit relative'>
@@ -69,7 +92,7 @@ function HeroSection() {
                 <img src="/profile/figma-logo.svg" alt="" /><span className='text-[16px]'>I <span className='text-main font-semibold'>design things</span> that make sense, and then <span className='font-semibold text-main'>&lt;&gt; I code &lt;/&gt;</span></span>
             </div>
             <div className='mt-4'>
-            <Button content={'Resume'} />
+            <Button content={'Resume'} onClick={handleResume} />
             </div>
             </div>
             </section>

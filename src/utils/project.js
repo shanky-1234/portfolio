@@ -17,12 +17,20 @@ export const project=[{
     img2:'/profile/project/mustang.png'
 },
 {
-    projectName:'ResumAI',
+    projectName:'ResuAI',
 badge:['Web Development','AI'],
 description:'A short project made in React with integration of AI resume scanning',
 color:'#FF9225',
 img1:'profile/project/resu1.png',
 img2:'profile/project/resu2.png'
+},
+{
+    projectName:'MoodSync',
+    badge:['UI/UX Design','App Development','AI','Full Stack'],
+description:'MoodSync is an AI-powered mood Journaling and mood tracking app. With most of us in our generation suffering from mental stress. MoodSync helps through daily mood check ins and mood jounraling where you can vent out about your day and MoodCoach powered by AI will give you repective mood score, emotion and suggestions. Powered by gamifications through leveling rewardsa and streak and a mascot system, MoodSync helps in making mood jounraling an interactive and fun experience',
+color:'#FF9225',
+img1:'profile/project/moodsync1.png',
+img2:'profile/project/moodsync2.png'
 }
 
 

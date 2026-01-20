@@ -25,7 +25,7 @@ body{
   }
 
   .scroll-container{
-    @apply md:h-[15vh] h-25
+    @apply md:h-[15vh] h-10
   }
   
 }

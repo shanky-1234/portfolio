@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Button({content,className,props}) {
+function Button({content,className,props,onClick}) {
   return (
-    <button className={`${className} p-2 rounded-lg `} {...props}>
+    <button className={`${className} p-2 rounded-lg `} onClick={onClick} {...props}>
                    <a href="#_" class="relative inline-block text-lg group">
     <span class="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-main transition-colors duration-300 ease-out border-2 border-main rounded-lg group-hover:text-white">
         <span class="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>

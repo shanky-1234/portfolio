@@ -1,10 +1,14 @@
 import React from 'react'
 import Badge from './Badge'
 import { MoveRight } from 'lucide-react'
+import { useNavigate } from 'react-router'
 
-function ProjectCard({ color, project,description,img1,img2,badges }) {
+function ProjectCard({ color, project,description,img1,img2,badges,link}) {
+  const handleClick = () => {
+  window.open("https://mitrasamaj.org/", "_blank", "noopener,noreferrer");
+};
   return (
-    <section className='bg-secondary w-full h-[80vh] md:h-[90vh] lg:h-[70vh] rounded-2xl overflow-hidden flex flex-col lg:flex-row inset-shadow-2xs cursor-pointer  project-card relative sm:items-center group'>
+    <section className='bg-secondary w-full h-[80vh] md:h-[90vh] lg:h-[70vh] rounded-2xl overflow-hidden flex flex-col lg:flex-row inset-shadow-2xs cursor-pointer  project-card relative sm:items-center group' onClick={handleClick}>
       <div className='lg:w-1/2 w-full px-4 lg:pl-8 py-8 flex flex-col md:justify-center h-screen'>
         <h3 className='font-main text-white font-bold md:text-3xl text-2xl text-left'>
           {project}
@@ -34,7 +38,7 @@ function ProjectCard({ color, project,description,img1,img2,badges }) {
         </div>
       </div>
 
-      <div style={{backgroundColor:color}} className={`overflow-hidden lg:w-1/2 w-full relative flex items-center justify-center rounded-b-2xl lg:rounded-r-2xl p-8 min-h-100 lg:min-h-full`}>
+      <div style={{backgroundColor:color}} className={`overflow-hidden lg:w-1/2 w-full relative flex items-center justify-center rounded-b-2xl lg:rounded-b-none lg:rounded-r-2xl p-8 min-h-100 lg:min-h-full`}>
         <div className='relative md:w-full md:h-full w-500 translate-y-0 lg:translate-y-25 flex items-end justify-center'>
           <img
             src={img1}
