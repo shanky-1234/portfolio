@@ -157,7 +157,7 @@ function HeroSection() {
     <section ref={heroRef} className='px-20 section-wrapper relative hero-section '>
         <div className='md:mt-45 lg:mt-40 mt-40 mb-5'>
         {/* Blur Section*/}
-        <div className='block bg-main rounded-full w-100 h-100 absolute inset-0 mx-auto z-0 blur-xl opacity-20'>
+        <div className='block overflow-x-hidden bg-main rounded-full w-80 h-80 md:w-100 md:h-100 absolute inset-0 mx-auto z-0 blur-xl opacity-20'>
         </div>
         <div className='flex flex-col md:flex-row mx-auto justify-center items-center relative'>
             <CardSwipe/>

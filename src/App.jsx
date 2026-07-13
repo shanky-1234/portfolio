@@ -19,6 +19,11 @@ import Experiences from './components/Experiences'
 import LoadingScreen from './components/LoadingScreen'
 
 gsap.registerPlugin(ScrollTrigger,ScrollSmoother,ScrollToPlugin,SplitText)
+ScrollTrigger.normalizeScroll(true);
+ScrollTrigger.config({
+  ignoreMobileResize: true,
+});
+
 
 function App() {
   const {menu,setMenu} = UseMenu()

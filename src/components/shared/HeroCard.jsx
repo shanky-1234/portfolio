@@ -63,7 +63,7 @@ function HeroCard({rotate,bg,src, className}) {
   return (
     <div ref={cardRef} onMouseMove={handleMouseEvent} onMouseLeave={handleMouseLeave} className={`${rotate} ${bg} ${className} rounded-2xl overflow-hidden md:w-[300px] md:h-[400px] w-[250px] h-[350px]`}>
         <div ref={imageRef} className='w-full h-full translate-y-12'>
-            <img  src={src} className='w-full h-full object-contain grayscale-100 hover:grayscale-0 transition-all'/>
+            <img  src={src} className='w-full h-full object-contain  md:grayscale-100 hover:grayscale-0 transition-all'/>
         </div>
     </div>
   )
