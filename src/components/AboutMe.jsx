@@ -1,50 +1,63 @@
-import React from "react";
+import React, { useRef } from "react";
 import JobCard from "./shared/JobCard";
 import { work } from "../utils/work";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap/all";
 import Pills from "./shared/Pills";
 import { pill } from "../utils/pill";
+import Button from "./shared/Button";
+import StickyNote from "./shared/StickyNote";
+import Draggable from 'react-draggable'
+
 
 function AboutMe() {
+  const nodeRef = useRef(null);
+  const boundref = useRef(null)
+  const dragRef = useRef(null)
+
   useGSAP(()=>{
-    const tl = gsap.timeline({
-      scrollTrigger:{
-        trigger:'#aboutme',
-        start:'80% top',
-        end:'+=150',
-        scrub:0.2
-      }
-    })
-    tl.to('.select',{
-      direction:1,
-      duration:1,
-      clipPath:'polygon(0 0, 0 100%, 100% 100%, 100% 0)',
-      ease:'power3.inOut'
-    })
-  })
+      const tl = gsap.timeline({
+        scrollTrigger:{
+          trigger:'#aboutme',
+          scrub:true,
+          markers:false,
+          start:'-80% top',
+          end:'0%',
+        }
+      })
+
+      tl.fromTo('#aboutme',{
+        scale:0.8
+      },{
+        scale:1
+      })
+  },[])
+
   return (
-    <section id="aboutme" className="md:mx-20 mx-8 relative md:mt-20 mt-10 text-center">
-      <div className="w-full">
-        <h1 className="text-4xl tracking-tight font-bold text-main">
-          A Little About Me
-        </h1>
-        <div className="w-full lg:text-center text-left  flex justify-center">
-          <p className="font-secondary text-sm md:text-[16px] mt-4  lg:w-[80%] ">
-            I am Shashank Tuladhar and i m currently working as UI/UX Designer
-            at Ikigai Tech. I’m a UI/UX designer and React developer who enjoys
-            turning complex ideas into simple and creative usable digital
-            experiences. I focus on understanding the problem first how users
-            think, what they need, and where things break before designing
-            interfaces that feel clear and intentional. When the design makes
-            sense, I bring it to life with React, paying close attention to
-            structure, performance, and scalability. I care about clarity,
-            consistency, and building products that don’t just look good, but
-            actually work.
+    <section id="aboutme" className="section-wrapper">
+      <div className="px-10 py-10 rounded-2xl bg-[#FFE6DF]">
+      <div className="w-full flex md:flex-row flex-col-reverse relative justify-between gap-12">
+        <div className="w-full">
+        <h2 className="text-4xl md:text-left text-center font-bold text-main">
+          PERSON BEHIND THE PIXELS
+        </h2>
+        <div className="w-full text-left mb-4">
+          <p className="font-secondary text-sm md:text-[16px] mt-4  text-text lg:w-[80%] ">
+            Hey! I'm Shashank, a UI/UX designer and Full Stack Developer who loves turning messy ideas into experiences that feel simple, intuitive, and enjoyable.
+My journey started with designing interfaces, but curiosity quickly pulled me into development. 
+<br/>
+<br/>Now I enjoy bringing my own designs to life with code, building products that don't just look good—they work beautifully.
+Lately, I've been diving into the world of AI, exploring RAG systems, intelligent interfaces, and how arificial intelligence can create more meaningful user experiences.
+<br/>
+<br/>
+When I'm not behind a screen, you'll probably find me playing guitar, sketching new ideas, exploring cafés, or wondering how everyday products could be designed just a little better.
+I'm always learning, always building, and always excited for the next challenge.
           </p>
         </div>
-        <h3 className="mt-4 text-lg text-main">Core Skills</h3>
-        <div className="flex mt-2 flex-wrap lg:w-1/2 w-full justify-center mx-auto gap-2">
+          <div className="mb-4">
+          <Button content={'LinkedIn'} className={'bg-main'}/>
+        </div>
+        <div className="flex flex-wrap w-full gap-2">
         
           {
             pill.map((item,index)=>{
@@ -54,23 +67,22 @@ function AboutMe() {
             })
           }
         </div>
-        <div className="flex-center relative mt-10 ">
-        <div className="md:w-200 h-1/2 md:h-1/4 md:block hidden select" style={{clipPath:'polygon(0 0, 0 0, 0 0, 0 0)'}}>
-          <img src="/profile/selection.svg" alt="" className="w-full h-full object-contain" />
+      
+      </div>
+      <div className="w-full h-full relative overflow-visible rotate-4">
+        <Draggable nodeRef={nodeRef} bounds="parent">
+          <div ref={nodeRef} className="cursor-move absolute top-10 left-10 z-50 ">
+        <StickyNote />
         </div>
-        <div className="flex flex-col gap-4 md:absolute justify-center z-10 ">
-          {
-            work.map((item,index)=>{
-              return(
-                <JobCard key={index} office={item.office} time={item.time} position={item.position}/>
-              )
-            })
-          }
-          
-        </div>
+        </Draggable>
+        <div className="relative z-20 bg-secondary lg:min-h-[600px] md:min-h-[500px] min-h-[400px] w-full h-full min-w-2xs rounded-2xl overflow-hidden ">
+          <div className="w-full lg:min-w-[550px] lg:min-h-[550px] h-full absolute bottom-[-15px] -translate-x-1">
+            <img src="/profile/mypicture2.png" alt="pic" className="w-full h-full object-cover"/>
+          </div>
         </div>
       </div>
-      
+      </div>
+      </div>
     </section>
   );
 }

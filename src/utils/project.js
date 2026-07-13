@@ -1,36 +1,30 @@
 
 
-export const project=[{
-    projectName:"Mitra Samaj",
-    badge:['UI/UX Design','Protoyping'],
-    description:'Mitra Samaj is a NGO established back in 2006. It has many focus area and they wanted a redesign of their old site. Researched and worked on the redesign of the site step by step by preaparing the wireframe to visualizing in prototype. Gave me insights and knowledge on how user connect with social organization through sites.',
-    color:"#0C8CE9",
-    img1:'/profile/project/mitra1.png',
-    img2:'/profile/project/mitra2.png'
-},
+export const project=[
     {
-    projectName:"Mustang Heli",
+    id:1,
+    projectName:"MUSTANG HELI",
     badge:['UI/UX Design','Protoyping','UX Research'],
     description:'Mustang Heli is a helicopter service built for himalayas. Consisting of team of Nimsdai - world recorder for cllimbing all the 14 Highest Peaks withour oxygen and in the most less time. This was a project where i delveloped my research skill and made the UI extra creative and unique',
     color:'#9747FF',
-    img1:'/profile/project/mustang2.png',
-    img2:'/profile/project/mustang.png'
+    img1:'/profile/project/mustang.png',
+    link:'https://mustangheli.com/'
 },
 {
-    projectName:'ResuAI',
-badge:['Web Development','AI'],
-description:'A short project made in React with integration of AI resume scanning',
+    id:2,
+    projectName:'MOODSYNC',
+badge:['Full Stack Development','GenAI','App Development','Interaction Design', 'UI/UX Design'],
+description:'MoodSync is an interactive and intelligent mood journaling and mood tracking application that makes mental well-being fun and engaging. With gamification, a friendly mascot, mini games and rewarding challenges, it encourages users to build healthier emotional habits every day.',
 color:'#FF9225',
-img1:'profile/project/resu1.png',
-img2:'profile/project/resu2.png'
+img1:'/profile/project/moodsync1.png',
 },
 {
-    projectName:'MoodSync',
-    badge:['UI/UX Design','App Development','AI','Full Stack'],
-description:'MoodSync is an AI-powered mood Journaling and mood tracking app. With most of us in our generation suffering from mental stress. MoodSync helps through daily mood check ins and mood jounraling where you can vent out about your day and MoodCoach powered by AI will give you repective mood score, emotion and suggestions. Powered by gamifications through leveling rewardsa and streak and a mascot system, MoodSync helps in making mood jounraling an interactive and fun experience',
+    id:3,
+    projectName:'SUMADHUR CMS DASHBOARD',
+    badge:['UI/UX Design','UX Research','Dashboard','CMS'],
+description:'Sumadhur is an audiobook listening application consisting of many audio related resources. Thus requiring a user-friendly and efficent CMS. ',
 color:'#FF9225',
-img1:'profile/project/moodsync1.png',
-img2:'profile/project/moodsync2.png'
+img1:'/profile/project/sumadhurcms.png',
 }
 
 

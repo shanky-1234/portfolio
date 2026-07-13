@@ -1,52 +1,139 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Button from './shared/Button'
 import { Link } from 'react-router'
 import {useGSAP} from '@gsap/react'
-import gsap from 'gsap/all'
+import gsap, { SplitText } from 'gsap/all'
     import Typewriter from 'typewriter-effect';
+import HeroCard from './shared/HeroCard'
+import CardSwipe from './shared/CardSwipe'
 
 function HeroSection() {
+
+    const iconHoverRefs = useRef([])
+    const heroRef = useRef(null)
+
+    const floatingIcons = [
+        {
+            src: '/profile/icons/image%202.png',
+            alt: 'Figma',
+            label: 'My Everyday Tool',
+            position: 'lg:left-[180px] md:left-[80px] top-10 -rotate-20',
+        },
+        {
+            src: '/profile/icons/image%201.png',
+            alt: 'Photoshop',
+            label: 'Pixel Precision',
+            position: 'lg:left-[20%] md:left-[90px] top-45 rotate-10',
+        },
+        {
+            src: '/profile/icons/image%203.png',
+            alt: 'Design',
+            label: 'Creating Side Projects',
+            position: 'lg:left-[220px] md:left-[120px] top-80 -rotate-10',
+        },
+        {
+            src: '/profile/icons/image%207.png',
+            alt: 'Node.js',
+            label: 'Backend Ready',
+            position: 'lg:right-[180px] md:right-[80px] top-10 -rotate-20',
+        },
+        {
+            src: '/profile/icons/image%205.png',
+            alt: 'MongoDB',
+            label: 'Data Driven',
+            position: 'lg:right-[20%] md:right-[90px] top-45 rotate-10',
+        },
+        {
+            src: '/profile/icons/image%2013.png',
+            alt: 'LangChain',
+            label: 'Exploring GenAI and RAG',
+            position: 'lg:right-[220px] md:right-[120px] top-80 -rotate-10',
+        },
+    ]
+
     useGSAP(()=>{
-        const cartoonTimeline = gsap.timeline({repeat:-1, yoyo:true})
-        cartoonTimeline.to('#cartoon',{ y:12, duration:4, rotation:-4, ease:'sine.inOut'})
+        const icons = gsap.utils.toArray('.floating-icon')
+        const heroEl = heroRef.current || document.querySelector('.hero-section')
 
-        const tl = gsap.timeline({
-            scrollTrigger:{
-                trigger:'.hero-section',
-                start:'-50% top',
-                end:'+=2000',
-                scrub:1.2,
-                
-            }
+        const splitHeading = SplitText.create('#title',{
+            type:"words"
         })
 
-        const startTl = gsap.timeline({
-            delay:0.5,
-        })
+       
 
-        startTl.to('.cartoon-img',{
-            opacity:1,
-            y:8,
-            ease:'power1.inOut'
-        }).from('.cursor',{
+        const runAnim = () => {
+             gsap.from(splitHeading.words,{
+             yPercent:100,
             opacity:0,
-            x:100,
-            ease:'power1.in',
-            duration:0.5
+            stagger:0.1,
+            ease:'power4.out',
+            duration:1,
         })
+            if (heroEl && icons.length) {
+                const center = heroEl.getBoundingClientRect()
 
-        tl.to('.cursor',{
-            rotate:-85,
-            y:100,
-            ease:'power1.inOut'
-        }).to('.stack',{
-            y:100,
-            rotate:50,
-            ease:'power1.inOut',
-            delay:1,
-            stagger:1.5
-        })
-    })
+                // position icons at center (behind cards)
+                icons.forEach((icon) => {
+                    const rect = icon.getBoundingClientRect()
+                    const dx = center.left + center.width / 2 - (rect.left + rect.width / 2)
+                    const dy = center.top + center.height / 2 - (rect.top + rect.height / 2)
+                    gsap.set(icon, { x: dx, y: dy, scale: 0.2, opacity: 0 })
+                })
+
+                // explode to their final positions, then start floating loop
+                const tl = gsap.timeline()
+                tl.to(icons, {
+                    x: 0,
+                    y: 0,
+                    scale: 1,
+                    opacity: 1,
+                    rotate: () => gsap.utils.random(-10, 10),
+                    duration: 0.8,
+                    ease: 'back.out(1.7)',
+                    stagger: 0.08,
+                })
+                .add(() => {
+                    // floating motion (continuous)
+                    icons.forEach((icon) => {
+                        gsap.to(icon, {
+                            y: gsap.utils.random(-10, -20),
+                            duration: gsap.utils.random(2.5, 5),
+                            rotate: gsap.utils.random(-10, 12),
+                            yoyo: true,
+                            ease: 'sine.inOut',
+                            repeat: -1,
+                            delay: gsap.utils.random(0, 1.5),
+                        })
+                    })
+                })
+            } else {
+                // fallback: just run floating motion if center cannot be computed
+                gsap.utils.toArray('.floating-icon').forEach((icon)=>{
+                    gsap.to(icon,{
+                        y:gsap.utils.random(-10,-20),
+                        duration:gsap.utils.random(2.5,5),
+                        rotate:gsap.utils.random(-10,12),
+                        stagger:0.2,
+                        yoyo:true,
+                        ease:"sine.inOut",
+                        repeat:-1,
+                        delay:gsap.utils.random(0,1.5)
+                    })
+                })
+            }
+        }
+
+        if (window && window.__appLoaded) {
+            runAnim()
+        } else {
+            window.addEventListener('loading:complete', runAnim, { once: true })
+        }
+
+        return () => {
+            try { window.removeEventListener('loading:complete', runAnim) } catch (e) {}
+        }
+    },[])
+
     const handleResume = ()=>{
         window.open(
     "/profile/resume/shashank.pdf",
@@ -54,57 +141,67 @@ function HeroSection() {
     "noopener,noreferrer"
   );
     }
+
+    const mouseEnter = (index)=>{
+        const label = iconHoverRefs.current[index]
+        if(label) label.style.opacity = 1
+    }
+
+    const mouseLeave = (index)=>{
+        const label = iconHoverRefs.current[index]
+        if(label) label.style.opacity = 0
+    }
+
   return (
     <>
-    <section id="aboutme"className='mx-20  relative md:mt-45 lg:mt-40 mt-40 hero-section cartoon-img opacity-0  '>
-        <div className='absolute -z-20 inset-0 justify-center flex items-center'>
-            <div className='md:w-125 md:h-125 w-200 h-200 '>
-            <img src="/profile/graph-background.png" alt="background" className='w-full h-full object-contain'/>
-            </div>
+    <section ref={heroRef} className='px-20 section-wrapper relative hero-section '>
+        <div className='md:mt-45 lg:mt-40 mt-40 mb-5'>
+        {/* Blur Section*/}
+        <div className='block bg-main rounded-full w-100 h-100 absolute inset-0 mx-auto z-0 blur-xl opacity-20'>
         </div>
-        <div className='z-20 inset-0 gap-8 md:-gap-20 flex flex-col text-center md:text-left md:flex-row justify-center items-center md:items-end-safe'>
-            <div className='lg:w-80 w-60 md:w-70  -rotate-4 flex flex-col justify-center items-center'>
-            <h3 className='font-display text-center text-3xl'>This is me!</h3>
-            <img src="/profile/cartoon.png" alt="cartoon" className='w-full h-full' id='cartoon' />
-            <Link to='https://www.linkedin.com/in/shashank-tuladhar-0a4b93275/' className=' hidden md:flex gap-2'><img src="/profile/linkedIn.svg" alt="" /><span className='font-display text-xl'>IRL Me Here!</span></Link>
-            </div>
-            <section className='w-fit relative'>
-                <div className='flex flex-col justify-center md:items-start items-center'>
-                  
-                    <div className='flex relative '>
-                      <div className='cursor w-10 inset-20 -translate-y-10 absolute md:-translate-y-10 translate-x-20 md:-translate-x-30 rotate-90 md:-rotate-15'>
-                <img src="/profile/Cursor.png" alt="" className='w-full object-contain '/>
-            </div>
-            <div className='flex flex-col justify-center gap-2'>
-            <h3 className='text-left text-xl md:text-2xl'>
-                    Wassup, I am
-            </h3>
-            <div className='p-3 md:p-4 bg-main rounded-3xl  md:w-fit sm:w-fit border-6 border-secondary'>
-                <h1 className='text-2xl md:text-[28px] lg:text-4xl font-black tracking-tight text-center text-white'>Shashank Tuladhar</h1>
-            </div>
-            </div>
-            </div>
-            <h4 className='font-display text-2xl md:text-3xl mt-4'>
-            <Typewriter options={{strings:['UI/UX Designer','Web Developer','Graphics Designer'],autoStart:true,loop:true,}}/>
-            </h4>
-            
-            <div className='flex flex-row lg:items-center items-start mt-2  md:gap-2'>
-                <img src="/profile/figma-logo.svg" alt="" /><span className='text-[16px]'>I <span className='text-main font-semibold'>design things</span> that make sense, and then <span className='font-semibold text-main'>&lt;&gt; I code &lt;/&gt;</span></span>
-            </div>
-            <div className='mt-4'>
-            <Button content={'Resume'} onClick={handleResume} />
-            </div>
-            </div>
-            </section>
-            <div className='w-60 hidden lg:block stack'>
-                <h3 className='font-display text-3xl -rotate-10'>My Stack</h3>
-                <img src="/profile/stack.png" alt="" />
-            </div>
+        <div className='flex flex-col md:flex-row mx-auto justify-center items-center relative'>
+            <CardSwipe/>
+
         </div>
+        {/*Floating Icons*/}
+        {floatingIcons.map((icon, index) => (
+            <div
+                key={icon.src}
+                className={`hidden md:block floating-icon absolute ${icon.position} md:w-14 w-12 h-14 md:h-14 group`}
+                onMouseEnter={() => mouseEnter(index)}
+                onMouseLeave={() => mouseLeave(index)}
+            >
+                <div className='md:w-14 w-12 h-14 md:h-14 rounded-3xl bg-white/95 border border-white/80 shadow-xl flex items-center justify-center p-2 transition-transform duration-300 hover:scale-110'>
+                    <img
+                        src={icon.src}
+                        alt={icon.alt}
+                        className='w-full h-full object-contain'
+                    />
+                </div>
+                <div
+                    ref={(el) => (iconHoverRefs.current[index] = el)}
+                    className='opacity-0 transition-opacity duration-200 mt-2 absolute left-1/2 -translate-x-1/2 whitespace-nowrap bg-white/95 border border-[#e5e5e5] rounded-full px-3 py-1 shadow-lg text-xs font-semibold text-text'
+                >
+                    <span className='text-md font-secondary text-gray-800'>{icon.label}</span>
+                    
+                </div>
+            </div>
+        ))}
+        </div>
+        <div>
+            <h1 className='text-center mx-auto leading-none' id='title'>DESIGNED TO REACT</h1>
+    
+            <span className='text-center flex justify-center font-secondary text-[12px] text-text'>(No Pun Intended)</span>
+            <div className='flex justify-center flex-col items-center mt-10 '>
+                <p className='text-main'>Hi, I am</p>
+                <div className='flex flex-col items-center gap-1 mb-4'>
+                <h3 className='text-main text-center'>SHASHANK TULADHAR</h3>
+                <h5 className='font-secondary text-text text-[16px] font-medium text-center'>User Centric Product Designer/Developer</h5>
+            </div>
+            <Button content={'Resume'} className='w-fit bg-main '/>
+            </div>
+            </div>
     </section>
-     <div className='mt-6 md:w-[80vw] w-[80vw] xs:w-[60vw] mx-auto flex justify-center items-center lg:hidden'>
-                <img src="/profile/stack_mobile.png" alt="stackmobile" />
-        </div>
         </>
   )
 }

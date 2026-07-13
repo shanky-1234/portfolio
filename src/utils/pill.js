@@ -1,34 +1,22 @@
 export const pill = [{
-    skill:'UI Design',
+    skill:'Product Design',
     rotate:'-2'
 },{
-     skill:'User Research',
+     skill:'React',
     rotate:'2'
 },{
- skill:'UX Research',
+ skill:'Express.js and Node.js',
     rotate:'-2'
 },{
- skill:'Wireframing',
+ skill:'MongoDB',
     rotate:'2'
 },{
-    skill:'Prototyping',
+    skill:'React Native',
     rotate:'-2'
 },{
-    skill:'Accessibility',
+    skill:'Langchain',
     rotate:'2'
 },{
-    skill:'Figma',
+    skill:'Branding and Graphic Design',
     rotate:'-2'
-},{
-    skill:'React',
-    rotate:'2'
-},{
-    skill:'Tailwind',
-    rotate:'-2'
-},{
-    skill:'React-Native',
-    rotate:'-2'
-},{
-    skill:'Express and Mongo DB',
-    rotate:'2'
-}]
+},]

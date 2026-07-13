@@ -4,78 +4,78 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { gallery } from "../utils/gallery"
+import { Swiper, SwiperSlide } from "swiper/react"
+
+import 'swiper/css';
+import { Autoplay } from "swiper/modules"
 
 gsap.registerPlugin(ScrollTrigger)
 
 function Gallery() {
-  const sliderRef = useRef(null)
 
-  useGSAP(() => {
-    const mm = gsap.matchMedia()
-    
-    // Desktop horizontal scroll
-    mm.add("(min-width: 770px)", () => {
-      if (!sliderRef.current) return
-
-      const sliderValue = sliderRef.current.scrollWidth - window.innerWidth
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".gallery",
-          start: "top top",
-          end: `bottom top`,
-          scrub: true,
-          endTrigger: 'footer',
-          pin: true,
-          invalidateOnRefresh: true,
-          pinSpacing: true
-        },
-      })
-
-      tl.to(".slider", {
-        x: -sliderValue,
-        ease: "power1.inOut",
-      })
-    })
-
-    // Mobile & Tablet - clear GSAP props
-    mm.add("(max-width: 769px)", () => {
-      gsap.set(".slider", { clearProps: "all" })
-    })
-
-    return () => mm.revert()
-  })
 
   return (
-    <section id="gallery" className="gallery w-full overflow-x-hidden md:h-screen md:px-30 px-8 md:mt-20 mt-10 text-center">
-      <div>
-        <h1 className="text-4xl tracking-tight font-bold text-main">
-          Gallery
-        </h1>
+    <section id="gallery" className="overflow-hidden h-fit">
+      <div className="h-full">
+      <div className="flex justify-center flex-col items-center mb-4">
+        <h2 className=" text-secondary leading-none text-center">
+          GRAPHIC DESIGN AND BRANDING
+        </h2>
         <p className="font-secondary">
           Some Designs and Posters I have made
         </p>
       </div>
       
-      <section
-        ref={sliderRef}
-        className="
-          slider
-          flex flex-col
-          md:flex-row md:flex-nowrap
-          w-full md:w-[200%]
-          gap-8 mt-10
-          overflow-hidden
-        "
-      >
-        {
-          gallery.map((item,index)=>{
-            return(
-              <GalleryCard key={index} src={item.src}/>
-            )
-          })
-        }
-      </section>
+     <Swiper
+  modules={[Autoplay]}
+  autoplay={true}
+  speed={1000}
+  slidesPerView={3}
+  spaceBetween={32}
+  loop={true}
+  observer={true}
+  observeParents={true}
+  loopAddBlankSlides={false}
+  className="gallery-swiper !overflow-visible "
+  breakpoints={{
+   0: {
+    slidesPerView: 1.12,
+    spaceBetween: 16,
+    autoplay:false
+  },
+  768: {
+    slidesPerView: 2.1,
+    spaceBetween: 24,
+    autoplay:false
+  },
+  1024: {
+    slidesPerView: 3,
+    spaceBetween: 32,
+     autoplay: {
+        delay: 0,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
+  },
+    1324: {
+    slidesPerView: 3,
+    spaceBetween: 80,
+  },
+  }}
+>
+  {
+    gallery.map((item,index)=>{
+      return(
+        <SwiperSlide >
+          <GalleryCard small={index%2 === 1} title={item.title} description={item.description} src2={item.src2} src={item.src}/>
+        </SwiperSlide>
+      )
+    })
+  }
+        
+          
+      </Swiper>
+      </div>
     </section>
   )
 }

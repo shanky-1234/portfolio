@@ -1,22 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
 @import "tailwindcss";
+
+@font-face {
+  font-family: "DharmaMain";
+  src: url("./assets/fonts/DharmaGothicE_ExBold_R.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DharmaSecondary";
+  src: url("./assets/fonts/DharmaGothicE_Bold_R.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 
 @theme {
-  --color-main:#0C8CE9;
-  --color-secondary:#383838;
-  --font-main:"Lexend", sans-serif;
-  --font-secondary:"Zilla Slab", serif;
-  --font-display:"Architects Daughter", cursive;
+  --color-main:#C73F00;
+  --color-secondary:#1A69A3;
+  --color-tertiary:#FFE6DF;
+  --color-text:#4E4E4E;
+  --font-main:"DharmaMain", sans-serif;
+  --font-sub:"DharmaSecondary", sans-serif;
+  --font-secondary: "Manrope", sans-serif;
+  --font-decorative: "Architects Daughter", cursive;
   --breakpoint-xs: 30rem;
 }
 
+.section-wrapper {
+  width: min(100% - 160px, 1280px);
+  margin-inline: auto;
+}
+
+@media (max-width: 1023px) {
+  .section-wrapper {
+    width: calc(100% - 64px);
+  }
+}
+
+@media (max-width: 767px) {
+  .section-wrapper {
+    width: calc(100% - 32px);
+  }
+}
+
+.swiper {
+  overflow: visible !important;
+  margin-left: 0 !important;
+  margin-right:0 !important
+}
+
+.swiper-slide {
+  background: transparent !important;
+}
+
+
+
+.swiper-slide-shadow {
+  display: none !important;
+}
+
+
+.sticky-note {
+  background: url(/profile/assets/stuckynote.svg);
+  background-size: cover;
+}
 html,
 body{
   margin:0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Lexend", sans-serif;
+  @apply font-main;
   cursor: url('/profile/cursor_pointer.svg'), auto;
+  background-color: #FAF8F4;
 }
 
 @layer components{
@@ -28,11 +88,39 @@ body{
     @apply md:h-[15vh] h-10
   }
   
+  .swiper{
+  margin-left:0;
 }
 
-.bg-image{
-  background: url(/profile/background.png);
-  background-size: contain;
 }
+
+.gallery-swiper .swiper-slide {
+  width: 540px;
+}
+
+
+h1{
+  @apply font-main text-main md:text-[128px] text-[80px]  font-extrabold tracking-[-2%] 
+}
+
+h2{
+  @apply font-sub lg:text-[96px] md:text-[80px] tracking-[-2%] text-[60px] leading-none
+}
+
+h3{
+    @apply font-sub text-6xl font-extrabold tracking-[-2%] 
+
+}
+
+h4{
+  @apply font-sub md:text-5xl text-4xl font-extrabold tracking-[-2%]
+
+}
+
+p{
+  @apply font-secondary text-[16px] 
+}
+
+
 
 
