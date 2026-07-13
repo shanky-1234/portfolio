@@ -27,22 +27,35 @@ ScrollTrigger.config({
 
 function App() {
   const {menu,setMenu} = UseMenu()
-  useGSAP(()=>{
-    const smoother = ScrollSmoother.create({
-      wrapper:'#smooth-wrapper',
-      content:'#smooth-content',
-      smooth:2,
-      effects:true,
-    })
-
-    window.addEventListener('load',()=>{
-      ScrollTrigger.refresh()
-    })
-
-    return ()=>{
-      smoother.kill()
-    }
+  
+  useGSAP(() => {
+  const smoother = ScrollSmoother.create({
+    wrapper: '#smooth-wrapper',
+    content: '#smooth-content',
+    smooth: 2,
+    effects: true,
   })
+
+  const hardRefresh = () => ScrollTrigger.refresh(true)
+
+  window.addEventListener('load', hardRefresh)
+  document.fonts?.ready?.then(hardRefresh)
+
+  // Real mobile address-bar collapse/expand fires this, not window resize
+  let vvTimer
+  const onViewportResize = () => {
+    clearTimeout(vvTimer)
+    vvTimer = setTimeout(hardRefresh, 150)
+  }
+  window.visualViewport?.addEventListener('resize', onViewportResize)
+
+  return () => {
+    smoother.kill()
+    window.removeEventListener('load', hardRefresh)
+    window.visualViewport?.removeEventListener('resize', onViewportResize)
+    clearTimeout(vvTimer)
+  }
+})
   return (
     <>
      <LoadingScreen/>
@@ -52,7 +65,7 @@ function App() {
       <div onClick={()=>setMenu(false)} className={`fixed transistion-all duration-500 top-0 left-0 h-screen w-full w-dvw bg-secondary opacity-50 z-20`}></div>
      }
      <div id="smooth-wrapper">
-		<div id="smooth-content" className='pb-[5vh]'>
+		<div id="smooth-content" className='pb-4 md:pb-10'>
      <HeroSection/>
      <div className='flex justify-center mt-[50px] mb-[50px]'>
       <img src='/profile/icons/line.svg'/>
@@ -80,9 +93,10 @@ function App() {
       <img src='/profile/icons/line.svg'/>
      </div>
  
-     <div className='pb-40'>
+     <div >
      <Footer/>
      </div>
+      <div className='h-10 md:h-40'></div>
      </div>
      </div>
     </>
