@@ -85,7 +85,7 @@ const tl = gsap.timeline({
           <h2 className="tracking-tight font-bold text-main flex-2 leading-none heading-2">
             PIXELS WITH PURPOSE
           </h2>
-          <p className="flex-1" id='paragraph-project'>
+          <p className="flex-1 text-text" id='paragraph-project'>
             Real projects. Real challenges. Thoughtful solutions built with
             users at the center.
           </p>

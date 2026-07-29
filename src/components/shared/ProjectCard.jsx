@@ -14,11 +14,11 @@ function ProjectCard({
   className = "",
   key
 }) {
-  const handleClick = () => {
-    if (!link) return;
+  const navigate = useNavigate()
 
-    window.open(link, "_blank", "noopener,noreferrer");
-  };
+  const handleClick=()=>{
+    navigate(link)
+  }
 
   return (
     <div
@@ -26,7 +26,7 @@ function ProjectCard({
       className={`
         project-card
         group
-        cursor-pointer
+        cursor-[url(/profile/casestudycursor.svg),_pointer]
         overflow-hidden
         rounded-2xl
         transition
@@ -57,7 +57,7 @@ function ProjectCard({
               ))}
             </div>
 
-            <p className="line-clamp-2 text-left">
+            <p className="line-clamp-2 text-left text-text">
               {description}
             </p>
           </div>

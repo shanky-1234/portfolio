@@ -21,7 +21,7 @@ function Gallery() {
         <h2 className=" text-secondary leading-none text-center">
           GRAPHIC DESIGN AND BRANDING
         </h2>
-        <p className="font-secondary">
+        <p className="font-secondary text-text">
           Some Designs and Posters I have made
         </p>
       </div>

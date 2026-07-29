@@ -1,106 +1,130 @@
+import { useEffect, useRef,useLayoutEffect} from "react";
+import { Route, Routes, useLocation } from "react-router";
 
-import reactLogo from './assets/react.svg'
-import ScrollTrigger from 'gsap/ScrollTrigger'
-import ScrollSmoother from 'gsap/ScrollSmoother'
-import NavBar from './components/NavBar'
-import HeroSection from './components/HeroSection'
-import AboutMe from './components/AboutMe'
-import { MenuProvider, UseMenu } from './context/MenuContext'
-import Projects from './components/Projects'
-import gsap, { ScrollToPlugin, SplitText } from 'gsap/all'
-import { useGSAP } from '@gsap/react'
-import {Link} from 'react-router'
-import ExtraLink from './components/ExtraLink'
-import Gallery from './components/Gallery'
-import Cta from './components/Cta'
-import Footer from './components/shared/Footer'
-import Methods from './components/Methods'
-import Experiences from './components/Experiences'
-import LoadingScreen from './components/LoadingScreen'
+import gsap, { ScrollToPlugin, SplitText } from "gsap/all";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import ScrollSmoother from "gsap/ScrollSmoother";
+import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger,ScrollSmoother,ScrollToPlugin,SplitText)
-ScrollTrigger.normalizeScroll(true);
+import { UseMenu } from "./context/MenuContext";
+
+import LoadingScreen from "./components/LoadingScreen";
+import NavBar from "./components/NavBar";
+import GoBack from "./components/casestudy/GoBack";
+
+import Home from "./pages/Home";
+import MustangHeli from "./pages/MustangHeli/MustangHeli";
+
+gsap.registerPlugin(
+  ScrollTrigger,
+  ScrollSmoother,
+  ScrollToPlugin,
+  SplitText
+);
+
 ScrollTrigger.config({
   ignoreMobileResize: true,
 });
 
-
 function App() {
-  const {menu,setMenu} = UseMenu()
-  
+  const location = useLocation();
+  const smootherRef = useRef(null);
+
+  const { menu, setMenu } = UseMenu();
+
+  const isHomePage = location.pathname === "/";
+  const isCaseStudy = location.pathname.startsWith("/case-study");
+
+  // Create ScrollSmoother only once
   useGSAP(() => {
-  const smoother = ScrollSmoother.create({
-    wrapper: '#smooth-wrapper',
-    content: '#smooth-content',
-    smooth: 2,
-    effects: true,
-  })
+    const wrapper = document.querySelector("#smooth-wrapper");
+    const content = document.querySelector("#smooth-content");
 
-  const hardRefresh = () => ScrollTrigger.refresh(true)
+    if (!wrapper || !content) return;
 
-  window.addEventListener('load', hardRefresh)
-  document.fonts?.ready?.then(hardRefresh)
+    smootherRef.current = ScrollSmoother.create({
+      wrapper,
+      content,
+      smooth: 2,
+      effects: true,
+      smoothTouch: 0.1,
+    });
 
-  // Real mobile address-bar collapse/expand fires this, not window resize
-  let vvTimer
-  const onViewportResize = () => {
-    clearTimeout(vvTimer)
-    vvTimer = setTimeout(hardRefresh, 150)
-  }
-  window.visualViewport?.addEventListener('resize', onViewportResize)
+    const handleLoad = () => {
+      ScrollTrigger.refresh(true);
+    };
 
-  return () => {
-    smoother.kill()
-    window.removeEventListener('load', hardRefresh)
-    window.visualViewport?.removeEventListener('resize', onViewportResize)
-    clearTimeout(vvTimer)
-  }
-})
+    window.addEventListener("load", handleLoad);
+
+    document.fonts?.ready?.then(() => {
+      ScrollTrigger.refresh(true);
+    });
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+
+      smootherRef.current?.kill();
+      smootherRef.current = null;
+    };
+  }, []);
+
+  // Handle route changes
+ useLayoutEffect(() => {
+    return () => {
+      smootherRef.current?.scrollTop(0);
+      ScrollTrigger.clearScrollMemory("manual");
+    };
+}, [location.pathname]);
+
+useEffect(() => {
+    setMenu(false);
+    let firstFrame, secondFrame;
+    firstFrame = requestAnimationFrame(() => {
+      secondFrame = requestAnimationFrame(() => {
+        ScrollTrigger.refresh(true);
+      });
+    });
+    return () => {
+      cancelAnimationFrame(firstFrame);
+      if (secondFrame) cancelAnimationFrame(secondFrame);
+    };
+}, [location.pathname, setMenu]);
+
   return (
     <>
-     <LoadingScreen/>
-     <NavBar/>
-     {
-      menu &&
-      <div onClick={()=>setMenu(false)} className={`fixed transistion-all duration-500 top-0 left-0 h-screen w-full w-dvw bg-secondary opacity-50 z-20`}></div>
-     }
-     <div id="smooth-wrapper">
-		<div id="smooth-content" className='pb-4 md:pb-10'>
-     <HeroSection/>
-     <div className='flex justify-center mt-[50px] mb-[50px]'>
-      <img src='/profile/icons/line.svg'/>
-     </div>
-     <AboutMe/>
-     <div className='flex justify-center mt-[50px] mb-[50px]'>
-      <img src='/profile/icons/line.svg'/>
-     </div>
-     <Methods/>
-     <div className='flex justify-center mt-[50px] mb-[50px]'>
-      <img src='/profile/icons/line.svg'/>
-     </div>
-     <Experiences/> 
-     <div className='flex justify-center mt-[50px] mb-[50px]'>
-      <img src='/profile/icons/line.svg'/>
-     </div>
-     <Projects/>
-     <ExtraLink/>
-     <div className='flex justify-center mt-[50px] mb-[50px]'>
-      <img src='/profile/icons/line.svg'/>
-     </div>
-    
-     <Gallery/>
-     <div className='flex justify-center mt-[50px] mb-[50px]'>
-      <img src='/profile/icons/line.svg'/>
-     </div>
- 
-     <div >
-     <Footer/>
-     </div>
-      <div className='h-10 md:h-40'></div>
-     </div>
-     </div>
+      {/* Fixed elements remain outside ScrollSmoother */}
+      <LoadingScreen key={location.key} />
+
+      {isHomePage && <NavBar />}
+
+      {isCaseStudy && <GoBack />}
+
+      {isHomePage && menu && (
+        <div
+          onClick={() => setMenu(false)}
+          className="
+            fixed inset-0 z-20
+            h-screen w-screen
+            bg-secondary/50
+          "
+        />
+      )}
+
+      {/* Only one smooth wrapper in the application */}
+      <div id="smooth-wrapper">
+        <div id="smooth-content" className="min-h-screen">
+          <Routes>
+            <Route path="/" element={<Home />} />
+
+            <Route
+              path="/case-study/MustangHeli"
+              element={<MustangHeli />}
+            />
+          </Routes>
+        </div>
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

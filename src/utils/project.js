@@ -8,7 +8,7 @@ export const project=[
     description:'Mustang Heli is a helicopter service built for himalayas. Consisting of team of Nimsdai - world recorder for cllimbing all the 14 Highest Peaks withour oxygen and in the most less time. This was a project where i delveloped my research skill and made the UI extra creative and unique',
     color:'#9747FF',
     img1:'/profile/project/mustang.png',
-    link:'https://mustangheli.com/'
+    link:'/case-study/MustangHeli'
 },
 {
     id:2,

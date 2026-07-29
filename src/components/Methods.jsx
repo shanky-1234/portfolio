@@ -1,35 +1,27 @@
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { SplitText } from 'gsap/all'
-import React from 'react'
+import React, { useRef } from 'react'
 
 function Methods() {
 
-    useGSAP(()=>{
-        let splitText = SplitText.create('.heading',{
-            type:'words'
-        })
+     const methodsRef = useRef(null)
 
+    useGSAP(() => {
+        let splitText = SplitText.create('.heading', { type: 'words' })
 
         const tl = gsap.timeline({
-            scrollTrigger:{
-                trigger:"#methods",
-                markers:false,
-                start:"-80% top",
-                end:"bottom",
-                once:true
+            scrollTrigger: {
+                trigger: methodsRef.current,
+                markers: false,
+                start: "top 80%",
+                end: "bottom top",
+                toggleActions: "play none none none",
             }
         })
 
-        tl.from('#paragraphs',{
-            yPercent:100,
-            opacity:0,
-            filter: 'blur(10px)',
-            stagger:0.6,
-            ease:'power1.inOut'
-        },0.3)
-
-        tl.from('#card-1',{
+        tl.from('#paragraphs', { yPercent:100, opacity:0, filter:'blur(10px)', stagger:0.6, ease:'power1.inOut' })
+        tl.from('#experience-card-0',{
             yPercent:100,
             opacity:0,
             filter: 'blur(10px)',
@@ -37,43 +29,28 @@ function Methods() {
             ease:'power1.inOut'
         },0.5)
 
-        tl.from('#card-2',{
+         tl.from('#experience-card-1',{
             yPercent:100,
             opacity:0,
             filter: 'blur(10px)',
-            stagger:0.8,
+            stagger:0.2,
             ease:'power1.inOut'
-        },0.7)
+        },0.8)
 
-             tl.from('#card-3',{
-            yPercent:100,
-            opacity:0,
-            filter: 'blur(10px)',
-            stagger:0.3,
-            ease:'power1.inOut'
-        },0.3)
-
-        gsap.from(splitText.words,{
-            yPercent:100,
-            opacity:0,
-            stagger:0.1,
-            ease:'power4.out',
-            duration:0.6,
-            scrollTrigger:{
-                trigger:'#methods',
-                start:"-80% top",
-            }
+        gsap.from(splitText.words, {
+            yPercent:100, opacity:0, stagger:0.1, ease:'power4.out', duration:0.6,
+            scrollTrigger: { trigger: methodsRef.current, start: "-80% top" }
         })
-    },[])
+    }, { scope: methodsRef, dependencies: [] })
   return (
-    <section id='methods' className='w-full px-10 py-10 bg-[#FFE6DF] '>
+    <section ref={methodsRef} id='methods' className='w-full px-10 py-10 bg-[#FFE6DF] '>
         <div>
         <div className='section-wrapper flex flex-col gap-8'>
             <div className='flex justify-between md:flex-row flex-col'>
                 <h2 className='overflow-hidden heading text-main leading-none flex-2'>
                     THE STEPS I TAKE
                 </h2>
-                <p className='flex-1' id='paragraphs'>
+                <p className='flex-1 text-text' id='paragraphs'>
                    AI can generate interfaces in seconds, but it can't replace thoughtful decisions. Meaningful products come from understanding people, not just prompts.
                 </p>
             </div>
@@ -91,7 +68,7 @@ function Methods() {
                         <img src="/profile/assets/lightbulb-glow.svg" alt="" className='w-full h-full object-contain' />
                     </div>
                   
-                    <div className='absolute right-4 bottom-10 '>
+                    <div className='absolute right-4 bottom-10'>
                     <h1 className='opacity-35 
                     text-white! !font-secondary leading-0'>1</h1>
                     </div>

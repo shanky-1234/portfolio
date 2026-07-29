@@ -122,6 +122,9 @@ h4{
   @apply font-sub md:text-5xl text-4xl font-extrabold tracking-[-2%]
 
 }
+h5{
+  @apply font-secondary text-[20px] md:text-[28px] font-bold 
+}
 
 p{
   @apply font-secondary text-[16px] 
