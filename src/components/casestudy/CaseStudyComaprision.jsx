@@ -8,7 +8,7 @@ function CaseStudyComaprision() {
     <section className='md:mb-20 mb-16'>
         <div className='section-wrapper '>
             <div className='flex justify-center md:mb-10'>
-            <Heading num={'10'} heading={'FROM LO-FI TO HI-FI'}/>
+            <Heading num={'11'} heading={'FROM LO-FI TO HI-FI'}/>
             </div>
             <div className='w-full mb-8 md:mb-10'>
             <h5>So what changed ?</h5>

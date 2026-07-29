@@ -56,10 +56,11 @@ function Home() {
       <img src='/profile/icons/line.svg'/>
      </div>
  
-     
+     <div>
      <Footer/>
+     </div>
      
-      <div className='h-10 md:h-30'></div>
+      <div className=''></div>
     </>
   )
 }

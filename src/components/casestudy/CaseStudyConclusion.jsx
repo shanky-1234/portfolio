@@ -6,7 +6,7 @@ function CaseStudyConclusion() {
      <section className='md:mb-20 mb-16'>
         <div className='section-wrapper '>
             <div className='flex justify-center md:mb-10'>
-            <Heading num={'11'} heading={'IN CONLUSION'}/>
+            <Heading num={'12'} heading={'IN CONLUSION'}/>
             </div>
         <div className='flex md:flex-row flex-col gap-4 md:gap-8'>
              <div className='p-4 bg-main rounded-2xl w-full'>

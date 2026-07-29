@@ -8,7 +8,7 @@ function CaseStudyDesignIdentities() {
         <div className='section-wrapper'>
             <div className='flex flex-col md:flex-row justify-between mb-4 md:mb-10'>
             <div className='flex gap-2 flex-3 h-fit items-center'>
-               <Heading num={'07'} heading={'DESIGN SYSTEM'}/>
+               <Heading num={'08'} heading={'DESIGN SYSTEM'}/>
             </div>
         </div>
         <div className='flex flex-col md:flex-row gap-4 md:justify-between relative'>

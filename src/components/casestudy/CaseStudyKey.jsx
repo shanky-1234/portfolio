@@ -8,7 +8,7 @@ function CaseStudyKey() {
         <div className='section-wrapper'>
             <div className='flex flex-col md:flex-row justify-between mb-4 md:mb-10'>
             <div className='flex gap-2 flex-3 h-fit items-center'>
-                <Heading num={'06'} heading={'KEY METRICS'}/>
+                <Heading num={'07'} heading={'KEY METRICS'}/>
             </div>
         </div>
         <div className='relative'>

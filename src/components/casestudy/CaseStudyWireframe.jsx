@@ -6,7 +6,7 @@ function CaseStudyWireframe() {
      <section className='md:mb-20 mb-16'>
         <div className='section-wrapper'>
             <div className=' mb-4 md:mb-10'>
-           <Heading num={'08'} heading={'WIREFRAME'}/>
+           <Heading num={'09'} heading={'WIREFRAME'}/>
            </div>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 justify-between relative'>
             <div className='max-w-[620px] w-full h-full max-h-[550px] rounded-2xl overflow-hidden '>

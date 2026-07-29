@@ -7,7 +7,7 @@ function CaseStudyDesign() {
     <section className='bg-[#FFE6DF] py-12 md:mb-20 mb-16'>
         <div className='section-wrapper'>
             <div className='flex justify-center mb-4 md:mb-10'>
-            <Heading num={'09'} heading={'FULLFILLING THE SCREENS!'}/>
+            <Heading num={'10'} heading={'FULLFILLING THE SCREENS!'}/>
             </div>
             <div className='mb-12'>
             <div className='w-full mb-8 md:mb-10'>
