@@ -198,7 +198,7 @@ function HeroSection() {
                 <h3 className='text-main text-center'>SHASHANK TULADHAR</h3>
                 <h5 className='font-secondary text-text text-[16px] font-medium text-center'>User Centric Product Designer/Developer</h5>
             </div>
-            <Button content={'Resume'} className='w-fit bg-main '/>
+            <Button content={'Resume'} className='w-fit bg-main ' onClick={handleResume}/>
             </div>
             </div>
     </section>
