@@ -5,8 +5,7 @@ import HeroSection from '../components/HeroSection'
 import AboutMe from '../components/AboutMe'
 import { MenuProvider, UseMenu } from '../context/MenuContext'
 import Projects from '../components/Projects'
-import gsap, { ScrollToPlugin, SplitText } from 'gsap/all'
-import { useGSAP } from '@gsap/react'
+import { ScrollToPlugin, SplitText } from 'gsap/all'
 import {Link} from 'react-router'
 import ExtraLink from '../components/ExtraLink'
 import Gallery from '../components/Gallery'
@@ -56,11 +55,9 @@ function Home() {
       <img src='/profile/icons/line.svg'/>
      </div>
  
-     <div>
      <Footer/>
-     </div>
-     
-      <div className=''></div>
+     {/* Reserve scroll room for the pinned project cards so the footer stays reachable. */}
+     <div className="h-38 bg-main" aria-hidden="true" />
     </>
   )
 }

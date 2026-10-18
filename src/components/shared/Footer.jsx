@@ -4,7 +4,7 @@ import Button from './Button'
 
 function Footer() {
   return (
-   <footer className=" bg-main overflow-hidden pb-8">
+   <footer className="w-full bg-main ">
   <div className="px-6 section-wrapper md:px-10 py-10 md:py-12">
     <div className="flex flex-col md:flex-row justify-between gap-8 mb-4">
       <h2 className="text-white leading-none">

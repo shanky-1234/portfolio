@@ -50,11 +50,11 @@ function Experiences() {
         <div>
             <h2 className='text-main text-center leading-none mb-4 heading-1' >MY JOURNEY SO FAR</h2>
         </div>
-        <div className='flex md:flex-row flex-col gap-4 justify-between'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
             {
                 work.map((item,key)=>{
                     return(
-                    <JobCard id={`experience-card-${key}`} src={item.logo} key={key} office={item.office} time={item.time} position={item.position} />
+                    <JobCard id={`experience-card-${key}`} src={item.logo} key={key} office={item.office} time={item.time} position={item.position} link={item.link} />
                 )})
             }
         </div>

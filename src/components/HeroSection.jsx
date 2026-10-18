@@ -28,7 +28,7 @@ function HeroSection() {
         {
             src: '/profile/icons/image%203.png',
             alt: 'Design',
-            label: 'Creating Side Projects',
+            label: 'Components Everywhere',
             position: 'lg:left-[220px] md:left-[120px] top-80 -rotate-10',
         },
         {
@@ -46,7 +46,7 @@ function HeroSection() {
         {
             src: '/profile/icons/image%2013.png',
             alt: 'LangChain',
-            label: 'Exploring GenAI and RAG',
+            label: 'Exploring RAG and Agentic AI',
             position: 'lg:right-[220px] md:right-[120px] top-80 -rotate-10',
         },
     ]

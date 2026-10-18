@@ -19,10 +19,10 @@ function Gallery() {
       <div className="h-full">
       <div className="flex justify-center flex-col items-center mb-4">
         <h2 className=" text-secondary leading-none text-center">
-          GRAPHIC DESIGN AND BRANDING
+          FREELANCE PROJECTS
         </h2>
         <p className="font-secondary text-text">
-          Some Designs and Posters I have made
+          I also do freelance graphics designing. I can design your social media posts, printing materials or package designs.
         </p>
       </div>
       

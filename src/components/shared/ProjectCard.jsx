@@ -17,7 +17,7 @@ function ProjectCard({
   const navigate = useNavigate()
 
   const handleClick=()=>{
-    navigate(link)
+    if (link) navigate(link)
   }
 
   return (
@@ -64,6 +64,7 @@ function ProjectCard({
 
           <button
             type="button"
+            disabled={!link}
             onClick={(event) => {
               event.stopPropagation();
               handleClick();
@@ -86,7 +87,7 @@ function ProjectCard({
     group-hover:after:w-full
   "
 >
-  Read Case Study
+  {link ? 'Read Case Study' : 'Case Study: In Progress'}
 </span>
           </button>
         </div>

@@ -10,6 +10,7 @@ function CaseStudy({children}) {
       {children}
       </main>
       <Footer/>
+       <div className="h-38 bg-main" aria-hidden="true" />
       </div>
     </>
   )
