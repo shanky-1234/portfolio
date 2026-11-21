@@ -80,6 +80,7 @@ function Projects() {
   return (
     <section
       ref={containerRef}
+      id="project"
       className="section-wrapper mb-10 md:mb-20 project"
     >
         <div className="project-heading-content flex md:flex-row flex-col flex-2 justify-between mb-4" id='project-heading'>

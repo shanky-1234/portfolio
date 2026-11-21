@@ -63,13 +63,13 @@ const handleMail=()=>{
                 </Link>
                 </li>
                 <li>
-                   <Link data-scroll=".project" onClick={handleLink} className={`${activeSection === '.project' ?'text-text font-[900]':'text-main font-bold'} font-secondary text-md transition-colors duration-300`}>
+                   <Link to="#project" data-scroll="#project" onClick={handleLink} className={`${activeSection === '#project' ?'text-text font-[900]':'text-main font-bold'} font-secondary text-md transition-colors duration-300`}>
                     Projects
                 </Link>
                 </li>
                  <li>
-                   <Link data-scroll='#gallery' onClick={handleLink} className={`${activeSection === '#gallery' ?'text-text font-[900]':'text-main font-bold'} font-secondary text-md transition-colors duration-300`}>
-                    Gallery
+                   <Link to="#gallery" data-scroll="#gallery" onClick={handleLink} className={`${activeSection === '#gallery' ?'text-text font-[900]':'text-main font-bold'} font-secondary text-md transition-colors duration-300`}>
+                    Showcase Gallery
                 </Link>
                 </li>
                 <Button content={"Let's Talk"} onClick={handleMail} className={'bg-main'}/>
@@ -94,17 +94,17 @@ const handleMail=()=>{
                 <div >
                     <ul className='flex flex-col gap-8 items-center'>
                 <li>
-                <Link data-scroll="#aboutme" onClick={handleLink} className='text-white text-md font-secondary font-medium'>
+                <Link data-scroll="#aboutme" onClick={handleLink} className={`${activeSection === '#aboutme' ? 'text-tertiary font-bold' : 'text-white font-medium'} text-md font-secondary transition-colors duration-300`}>
                     About Me
                 </Link>
                 </li>
                 <li>
-                   <Link data-scroll="#project" onClick={handleLink} className='text-white text-md font-secondary font-medium'>
+                   <Link to="#project" data-scroll="#project" onClick={handleLink} className={`${activeSection === '#project' ? 'text-tertiary font-bold' : 'text-white font-medium'} text-md font-secondary transition-colors duration-300`}>
                     Projects
                 </Link>
                 </li>
                 <li>
-                   <Link data-scroll="#gallery" onClick={handleLink} className='text-white text-md font-secondary font-medium'>
+                   <Link to="#gallery" data-scroll="#gallery" onClick={handleLink} className={`${activeSection === '#gallery' ? 'text-tertiary font-bold' : 'text-white font-medium'} text-md font-secondary transition-colors duration-300`}>
                     Gallery
                 </Link>
                 </li>

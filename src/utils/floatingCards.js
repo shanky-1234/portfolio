@@ -1,0 +1,58 @@
+export const floatingCards = [
+  {
+    title: "Village in bloom",
+    category: "Social media",
+    description: "A colorful campaign celebrating local culture and community.",
+    image: "/profile/project/GraphicDesign/globalvillage.webp",
+    alt: "Bright, colorful Global Village graphic design",
+  },
+  {
+    title: "Cafe Zero",
+    category: "Branding",
+    description: "A playful visual identity made for good coffee and good company.",
+    image: "/profile/project/GraphicDesign/CafeZeroV1.png",
+    alt: "Cafe Zero graphic design",
+  },
+  {
+    title: "Durbar",
+    category: "Product design",
+    description: "A product visual exploring rich color, texture, and detail.",
+    image: "/profile/project/GraphicDesign/durbar.webp",
+    alt: "Durbar product graphic design",
+  },
+  {
+    title: "A little something",
+    category: "Print",
+    description: "A printed piece designed to make the unboxing feel special.",
+    image: "/profile/project/GraphicDesign/BrochureGiftV1P1.png",
+    alt: "Gift brochure print design",
+  },
+  {
+    title: "Notes & ideas",
+    category: "Editorial",
+    description: "An everyday notebook, given a little extra personality.",
+    image: "/profile/project/GraphicDesign/notebook.webp",
+    alt: "Notebook cover design",
+  },
+  {
+    title: "Maalebuneko",
+    category: "Identity",
+    description: "A distinctive logo concept with a warm, handcrafted feel.",
+    image: "/profile/project/GraphicDesign/maalebuneko.png",
+    alt: "Maalebuneko logo design",
+  },
+  {
+    title: "Kora",
+    category: "Visual identity",
+    description: "A bold identity concept built to stand out at a glance.",
+    image: "/profile/project/GraphicDesign/KORACOFFEE.png",
+    alt: "YTS visual identity design",
+  },
+  {
+    title: "Your next creative",
+    category: "Coming soon",
+    description: "A placeholder for the next piece you want to share.",
+    image: "",
+    alt: "",
+  },
+];

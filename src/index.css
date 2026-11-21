@@ -131,6 +131,416 @@ p{
   @apply font-secondary text-[16px] 
 }
 
+.floating-showcase {
+  overflow: hidden;
+}
 
+.floating-showcase-stage {
+  position: relative;
+  width: min(100%, 1600px);
+  min-height: 960px;
+  margin-inline: auto;
+}
 
+.floating-showcase-cards {
+  display: contents;
+}
+
+.floating-showcase-card {
+  position: absolute;
+  width: clamp(150px, 22vw, 350px);
+  aspect-ratio: 1.15;
+  filter: drop-shadow(0 16px 20px rgb(52 39 32 / 12%));
+}
+
+.floating-showcase-card[data-slot="0"] {
+  top: 2%;
+  left: 7%;
+}
+
+.floating-showcase-card[data-slot="1"] {
+  top: -1%;
+  left: 37%;
+}
+
+.floating-showcase-card[data-slot="2"] {
+  top: 2%;
+  right: 7%;
+}
+
+.floating-showcase-card[data-slot="3"] {
+  top: 36%;
+  left: 0;
+}
+
+.floating-showcase-card[data-slot="4"] {
+  top: 36%;
+  right: 0;
+}
+
+.floating-showcase-card[data-slot="5"] {
+  bottom: 2%;
+  left: 7%;
+}
+
+.floating-showcase-card[data-slot="6"] {
+  bottom: -1%;
+  left: 37%;
+}
+
+.floating-showcase-card[data-slot="7"] {
+  right: 7%;
+  bottom: 2%;
+}
+
+.floating-showcase-artwork {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 0;
+  border-radius: 18px;
+  background: transparent;
+  rotate: calc((var(--card-index) - 3.5) * 0.55deg);
+}
+
+.floating-showcase-card:nth-child(2n) .floating-showcase-artwork {
+  border-radius: 24px 14px 22px 14px;
+}
+
+.floating-showcase-artwork > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: inherit;
+}
+
+.floating-showcase-image-placeholder {
+  display: flex;
+  position: relative;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px;
+  overflow: hidden;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 85% 20%, rgb(255 219 120 / 90%) 0 9%, transparent 9.5%),
+    radial-gradient(circle at 20% 85%, rgb(255 255 255 / 20%) 0 20%, transparent 20.5%),
+    linear-gradient(145deg, #f8a47f, #f05d57 55%, #c73f00);
+  color: #fff8f1;
+  font-family: "Manrope", sans-serif;
+}
+
+.floating-showcase-image-placeholder > span:first-child {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.floating-showcase-image-placeholder > strong {
+  margin-top: 8px;
+  font-size: clamp(24px, 3.6vw, 48px);
+  line-height: 0.98;
+  letter-spacing: -0.07em;
+}
+
+.floating-showcase-image-placeholder .placeholder-star {
+  position: absolute;
+  right: 18px;
+  bottom: 12px;
+  color: #ffdf79;
+  font-size: 60px;
+}
+
+.floating-showcase-copy {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: min(620px, 48%);
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.floating-showcase-copy > p {
+  max-width: 590px;
+  margin: 20px auto 0;
+  color: #66615d;
+  font: 500 clamp(13px, 1.1vw, 16px)/1.65 "Manrope", sans-serif;
+}
+
+@media (max-width: 1100px) and (min-width: 701px) {
+  .floating-showcase-stage {
+    min-height: 880px;
+  }
+
+  .floating-showcase-card {
+    width: clamp(150px, 19vw, 210px);
+  }
+
+  .floating-showcase-copy {
+    width: 48%;
+  }
+}
+
+@media (max-width: 700px) {
+  .floating-showcase {
+    padding: 24px 16px 40px;
+  }
+
+  .floating-showcase-stage {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+  }
+
+  .floating-showcase-cards {
+    display: grid;
+    width: min(100%, 540px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px 18px;
+    margin-inline: auto;
+  }
+
+  .floating-showcase-card,
+  .floating-showcase-card[data-slot] {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    aspect-ratio: 1.15;
+  }
+
+  .floating-showcase-copy {
+    position: relative;
+    top: auto;
+    left: auto;
+    order: 0;
+    width: 100%;
+    margin-block: 48px;
+    padding-inline: 4px;
+    transform: none;
+  }
+
+  .floating-showcase-copy > p {
+    margin-top: 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .floating-showcase-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.new-footer {
+  overflow: visible;
+  padding: 48px clamp(16px, 4vw, 56px) 32px;
+  background: #fffaf1;
+  height: auto;
+}
+
+.new-footer-layout {
+  display: grid;
+  width: min(100%, 1280px);
+  grid-template-columns: minmax(230px, 0.75fr) minmax(0, 1.4fr);
+  align-items: end;
+  margin-inline: auto;
+  padding: clamp(20px, 3vw, 40px);
+  border-radius: 28px;
+  background: transparent;
+}
+
+.new-footer-mascot {
+  position: relative;
+  z-index: 1;
+  justify-self: end;
+  width: min(112%, 430px);
+  margin-right: -34px;
+  margin-bottom: -2px;
+}
+
+.new-footer-mascot img {
+  display: block;
+  width: 100%;
+  max-height: 430px;
+  object-fit: contain;
+  object-position: bottom;
+}
+
+.new-footer-bubble {
+  position: relative;
+  padding: clamp(28px, 3.5vw, 46px);
+  border-radius: 22px 22px 22px 10px;
+  background: #c73f00;
+  color: #fffaf1;
+}
+
+.new-footer-bubble::before {
+  position: absolute;
+  top: 54px;
+  left: -38px;
+  width: 42px;
+  height: 48px;
+  background: inherit;
+  clip-path: polygon(100% 0, 100% 100%, 0 50%);
+  content: "";
+}
+
+.new-footer-title {
+  margin: 0 0 14px;
+  color: inherit;
+  font: 400 clamp(30px, 3.5vw, 44px)/1.12 "Architects Daughter", cursive;
+}
+
+.new-footer-resume {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  margin-inline: auto;
+  border-radius: 999px;
+  background: #fffaf1;
+  color: #c73f00;
+  font: 700 13px/1 "Manrope", sans-serif;
+  text-decoration: none;
+}
+
+.new-footer-resume:focus-visible,
+.new-footer-copy:focus-visible,
+.new-footer-social-links a:focus-visible {
+  outline: 2px solid #fffaf1;
+  outline-offset: 3px;
+}
+
+.new-footer-email-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  margin-top: 16px;
+  font: 400 13px/1.5 "Manrope", sans-serif;
+}
+
+.new-footer-email-row > a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.new-footer-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: 400 13px/1.5 "Architects Daughter", cursive;
+}
+
+.new-footer-social-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 18px;
+  margin-top: 20px;
+  font: 400 13px/1.5 "Architects Daughter", cursive;
+}
+
+.new-footer-social-links {
+  display: flex;
+  gap: 12px;
+}
+
+.new-footer-social-links a {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+}
+
+.new-footer-social-links img {
+  display: block;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.new-footer-note {
+  margin: 18px 0 0;
+  color: inherit;
+  font: 400 13px/1.5 "Architects Daughter", cursive;
+}
+
+@media (max-width: 767px) {
+  .new-footer {
+    padding: 36px 16px 24px;
+  }
+
+  .new-footer-layout {
+    display: flex;
+    width: min(100%, 540px);
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .new-footer-mascot {
+    width: min(76%, 400px);
+    order: 2;
+    margin: 28px 0 0;
+  }
+
+  .new-footer-mascot img {
+    max-height: 340px;
+  }
+
+  .new-footer-bubble {
+    order: 1;
+    width: 100%;
+    padding: 28px 22px 24px;
+    border-radius: 20px;
+  }
+
+  .new-footer-bubble::before {
+    top: auto;
+    bottom: -25px;
+    left: 24%;
+    width: 38px;
+    height: 28px;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+  }
+
+  .new-footer-title {
+    font-size: clamp(24px, 7vw, 28px);
+    text-align: center;
+  }
+
+  .new-footer-email-row {
+    justify-content: center;
+    font-size: 12px;
+  }
+
+  .new-footer-social-row {
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .new-footer-social-links {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .new-footer-note {
+    text-align: center;
+  }
+}
 

@@ -1,7 +1,7 @@
 export const work =[
     {
     office:"ALTERNATIVE TECHNOLOGY",
-    position:'UI/UX DESIGNER/DEVELOPER',
+    position:'UI/UX DEVELOPER',
     time:'2026-Current',
     logo:'/profile/logo/at_logo.svg',
     link:'https://alternative.com.np/'

@@ -8,12 +8,12 @@ import Projects from '../components/Projects'
 import { ScrollToPlugin, SplitText } from 'gsap/all'
 import {Link} from 'react-router'
 import ExtraLink from '../components/ExtraLink'
-import Gallery from '../components/Gallery'
 import Cta from '../components/Cta'
-import Footer from '../components/shared/Footer'
 import Methods from '../components/Methods'
 import Experiences from '../components/Experiences'
 import LoadingScreen from '../components/LoadingScreen'
+import FloatingCardShowcase from '../components/FloatingCardShowcase'
+import NewFooter from '../components/shared/NewFooter'
 
 
 
@@ -50,14 +50,13 @@ function Home() {
       <img src='/profile/icons/line.svg'/>
      </div>
     
-     <Gallery/>
-     <div className='flex justify-center mt-[50px] mb-[50px]'>
+     <FloatingCardShowcase/>
+     <div className='flex justify-center mt-[50px] '>
       <img src='/profile/icons/line.svg'/>
      </div>
  
-     <Footer/>
-     {/* Reserve scroll room for the pinned project cards so the footer stays reachable. */}
-     <div className="h-38 bg-main" aria-hidden="true" />
+     <NewFooter/>
+     <div className="h-[10vh]" aria-hidden="true" />
     </>
   )
 }
